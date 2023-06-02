@@ -8,7 +8,7 @@ export const Navbar = () => {
         &nbsp; UserName
       </span>
 
-      <button className="btn btn-outline-danger">
+      <button className="btn btn-outline-light">
         <i className="fas fa-sign-out-alt"></i>
         <span> Logout</span>
       </button>
