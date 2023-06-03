@@ -6,6 +6,7 @@ import { addHours } from "date-fns";
 import { CalendarEventBox, Navbar, CalendarModal } from "../";
 import { localizer } from "../../helpers";
 import { getMessagesEn } from "../../helpers/getMessagesEn";
+import { useUiStore } from "../../hooks/useUiStore";
 
 const events = [
   {
@@ -26,6 +27,8 @@ export const CalendarPage = () => {
     localStorage.getItem("lastView") || "month"
   );
 
+  const { openDateModal } = useUiStore();
+
   const eventStyleGetter = (event, start, end, isSelected) => {
     const style = {
       backgroundColor: "#347CF7",
@@ -38,7 +41,7 @@ export const CalendarPage = () => {
   };
 
   const onDoubleClick = (event) => {
-    console.log({ doubleClick: event });
+    openDateModal();
   };
 
   const onSelect = (event) => {
