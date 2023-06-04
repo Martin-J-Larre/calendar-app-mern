@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Calendar } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { addHours } from "date-fns";
 
-import { CalendarEventBox, Navbar, CalendarModal } from "../";
+import { CalendarEventBox, Navbar, CalendarModal, BtnAddNew } from "../";
 import { localizer } from "../../helpers";
 import { getMessagesEn } from "../../helpers/getMessagesEn";
 import { useUiStore, useCalendarStore } from "../../hooks";
@@ -14,7 +13,7 @@ export const CalendarPage = () => {
   );
 
   const { openDateModal } = useUiStore();
-  const { events } = useCalendarStore();
+  const { events, setActiveEvent } = useCalendarStore();
 
   const eventStyleGetter = (event, start, end, isSelected) => {
     const style = {
@@ -32,7 +31,7 @@ export const CalendarPage = () => {
   };
 
   const onSelect = (event) => {
-    console.log({ click: event });
+    setActiveEvent(event);
   };
 
   const onViewChanged = (event) => {
@@ -60,6 +59,7 @@ export const CalendarPage = () => {
         onView={onViewChanged}
       />
       <CalendarModal />
+      <BtnAddNew />
     </>
   );
 };
