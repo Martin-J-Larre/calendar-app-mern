@@ -2,7 +2,13 @@ import { useState } from "react";
 import { Calendar } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
-import { CalendarEventBox, Navbar, CalendarModal, BtnAddNew } from "../";
+import {
+  CalendarEventBox,
+  Navbar,
+  CalendarModal,
+  BtnAddNew,
+  BtnDelete,
+} from "../";
 import { localizer } from "../../helpers";
 import { getMessagesEn } from "../../helpers/getMessagesEn";
 import { useUiStore, useCalendarStore } from "../../hooks";
@@ -60,6 +66,7 @@ export const CalendarPage = () => {
       />
       <CalendarModal />
       <BtnAddNew />
+      <BtnDelete />
     </>
   );
 };
