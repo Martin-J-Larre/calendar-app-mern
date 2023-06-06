@@ -1,5 +1,4 @@
 exports.createUser = (req, res) => {
-  console.log(req);
   const { name, email, password } = req.body;
 
   res.status(201).json({
