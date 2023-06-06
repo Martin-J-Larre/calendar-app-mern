@@ -1,10 +1,27 @@
 exports.createUser = (req, res) => {
-  const data = req.body;
-  res.json({ ok: "ok", message: "createUser", data });
+  console.log(req);
+  const { name, email, password } = req.body;
+
+  res.status(201).json({
+    ok: "ok",
+    message: "createUser",
+    name,
+    email,
+    password,
+  });
 };
+
 exports.loginUser = (req, res) => {
-  res.json({ ok: "ok", message: "loginUser" });
+  const { email, password } = req.body;
+
+  res.status(200).json({
+    ok: "ok",
+    message: "loginUser",
+    email,
+    password,
+  });
 };
+
 exports.renewTokenUser = (req, res) => {
   res.json({ ok: "ok", message: "renewNewToken" });
 };
