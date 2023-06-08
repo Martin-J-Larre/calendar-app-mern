@@ -6,7 +6,7 @@ const fieldValidator = require("../middlewares/fieldValidator");
 const { isDate } = require("../helpers/isDate");
 const {
   createEvent,
-  getEvent,
+  getEvents,
   updateEvent,
   deleteEvent,
 } = require("../controllers/events");
@@ -23,7 +23,7 @@ router.post(
   ],
   createEvent
 );
-router.get("/", getEvent);
+router.get("/", getEvents);
 router.put("/:id", updateEvent);
 router.delete("/:id", deleteEvent);
 
