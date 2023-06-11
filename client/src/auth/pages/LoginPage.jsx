@@ -1,5 +1,7 @@
+import { useEffect } from "react";
+import Swal from "sweetalert2";
+import { useAuthStore, useForm } from "../../hooks/";
 import "./loginPage.css";
-import { useForm } from "../../hooks/";
 
 const loginForm = {
   loginEmail: "",
@@ -14,6 +16,9 @@ const registerForm = {
 };
 
 export const LoginPage = () => {
+  const { startLogin, startRegister, status, user, errorMessage } =
+    useAuthStore();
+
   const {
     loginEmail,
     loginPassword,
@@ -30,11 +35,22 @@ export const LoginPage = () => {
 
   const loginSubmit = (e) => {
     e.preventDefault();
-    console.log({ loginEmail, loginPassword });
+    startLogin({ email: loginEmail, password: loginPassword });
   };
 
   const registerSubmit = (e) => {
     e.preventDefault();
+    if (registerPassword !== registerConfirmPassword) {
+      Swal.fire({
+        icon: "error",
+        text: "Password is not matching",
+      });
+    }
+    startRegister({
+      name: registerName,
+      email: registerEmail,
+      password: registerPassword,
+    });
     console.log({
       registerName,
       registerEmail,
@@ -42,6 +58,15 @@ export const LoginPage = () => {
       registerConfirmPassword,
     });
   };
+
+  useEffect(() => {
+    if (errorMessage !== undefined) {
+      Swal.fire({
+        icon: "error",
+        text: errorMessage,
+      });
+    }
+  }, [errorMessage]);
 
   return (
     <div className="container login-container">
