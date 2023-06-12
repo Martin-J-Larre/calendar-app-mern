@@ -5,29 +5,43 @@ import {
   onUpdateEvent,
   onDeleteEvent,
 } from "../store/calendar/calendarSlice";
+import { calendarApi } from "../api";
+import { convertEventsToDataEvents } from "../helpers";
 
 export const useCalendarStore = () => {
   const dispatch = useDispatch();
   const { events, activeEvent } = useSelector((state) => state.calendar);
+  const { user } = useSelector((state) => state.auth);
 
   const setActiveEvent = (calendarEvent) => {
     dispatch(onSetActiveEvent(calendarEvent));
   };
 
   const startSavingEvent = async (calendarEvent) => {
-    // TODO: Send to backend
-    // TODO: wait to backend
     if (calendarEvent._id) {
-      // updating
       dispatch(onUpdateEvent({ ...calendarEvent }));
     } else {
-      // creating
-      dispatch(onAddNewEvent({ ...calendarEvent, _id: new Date().getDate() }));
+      const { data } = await calendarApi.post("/event", calendarEvent);
+      console.log({ data });
+
+      dispatch(
+        onAddNewEvent({ ...calendarEvent, _id: data.eventSaved.id, user })
+      );
     }
   };
 
   const startDeletingEvent = () => {
     dispatch(onDeleteEvent());
+  };
+
+  const startLoadingEvents = async () => {
+    try {
+      const { data } = await calendarApi.get("/event");
+      const events = convertEventsToDataEvents(data.events);
+      console.log({ events });
+    } catch (error) {
+      console.log("Error Loading Events", error);
+    }
   };
   return {
     events,
@@ -36,5 +50,6 @@ export const useCalendarStore = () => {
     setActiveEvent,
     startSavingEvent,
     startDeletingEvent,
+    startLoadingEvents,
   };
 };
