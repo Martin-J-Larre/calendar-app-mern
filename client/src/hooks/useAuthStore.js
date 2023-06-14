@@ -21,7 +21,7 @@ export const useAuthStore = () => {
       });
       localStorage.setItem("token", data.token);
       localStorage.setItem("token-init-date", new Date().getTime());
-      dispacth(onLogin({ name: data.user.name, uid: data.user._id }));
+      dispacth(onLogin({ name: data.name, uid: data.uid }));
     } catch (error) {
       dispacth(onLogout("Email or password incorrect"));
       console.log(error);

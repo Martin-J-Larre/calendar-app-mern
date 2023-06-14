@@ -81,7 +81,6 @@ export const CalendarModal = () => {
     }
     if (formValues.title.length <= 0) return;
 
-    // TODO
     await startSavingEvent(formValues);
     closeDateModal();
     setFormSubmitted(false);
@@ -96,11 +95,11 @@ export const CalendarModal = () => {
       overlayClassName="modal-bg"
       closeTimeoutMS={200}
     >
-      <h1> New Event </h1>
+      <h1> New event </h1>
       <hr />
       <form className="container" onSubmit={onSubmit}>
         <div className="form-group mb-2">
-          <label>Date and hour start</label>
+          <label>Start date and time</label>
           <DatePicker
             selected={formValues.start}
             className="form-control"
@@ -111,7 +110,7 @@ export const CalendarModal = () => {
         </div>
 
         <div className="form-group mb-2">
-          <label>Date and hour end</label>
+          <label>End date and time</label>
           <DatePicker
             minDate={formValues.start}
             selected={formValues.end}

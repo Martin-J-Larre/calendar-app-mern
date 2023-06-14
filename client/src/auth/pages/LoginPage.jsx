@@ -72,7 +72,7 @@ export const LoginPage = () => {
     <div className="container login-container">
       <div className="row">
         <div className="col-md-6 login-form-1">
-          <h3>Login</h3>
+          <h3>Log in</h3>
           <form onSubmit={loginSubmit}>
             <div className="form-group mb-2">
               <input
@@ -95,7 +95,7 @@ export const LoginPage = () => {
               />
             </div>
             <div className="form-group mb-2">
-              <input type="submit" className="btnSubmit" value="Login" />
+              <input type="submit" className="btnSubmit" value="Log in" />
             </div>
           </form>
         </div>
